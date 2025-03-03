@@ -55,9 +55,9 @@
             this.TreeButton.Name = "TreeButton";
             this.TreeButton.Size = new System.Drawing.Size(100, 23);
             this.TreeButton.TabIndex = 2;
-            this.TreeButton.Text = "Синтаксическое дерево";
+            //this.TreeButton.Text = "Синтаксическое дерево";
             this.TreeButton.UseVisualStyleBackColor = true;
-            this.TreeButton.Click += new System.EventHandler(this.TreeButton_Click);
+            //this.TreeButton.Click += new System.EventHandler(this.TreeButton_Click);
 
             // syntaxTreeView
             this.syntaxTreeView.Location = new System.Drawing.Point(12, 150);
@@ -75,7 +75,6 @@
             this.Controls.Add(this.inputTextBox);
             this.Name = "Form1";
             this.Text = "Лексический и синтаксический анализатор";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
         }
