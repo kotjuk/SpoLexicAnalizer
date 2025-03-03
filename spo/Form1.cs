@@ -66,6 +66,8 @@ namespace spo
             List<string> keywords = new List<string>();
             List<string> symbols = new List<string>();
 
+            List<string> internalCode = new List<string>(); // Добавим список для внутреннего кода
+
             int i = 0;
             while (i < code.Length)
             {
@@ -81,26 +83,37 @@ namespace spo
                 {
                     string identifier = ReadWhile(code, ref i, ch => char.IsLetterOrDigit(ch) || ch == '_');
                     if (Keywords.Contains(identifier))
+                    {
                         keywords.Add(identifier);
+                        internalCode.Add($"KEYWORD({identifier})");
+                    }
                     else
+                    {
                         identifiers.Add(identifier);
+                        internalCode.Add($"IDENTIFIER({identifier})");
+                    }
                 }
                 else if (char.IsDigit(c))
                 {
                     string number = ReadWhile(code, ref i, ch => char.IsDigit(ch));
                     numbers.Add(number);
+                    internalCode.Add($"NUMBER({number})");
                 }
                 else
                 {
                     symbols.Add(c.ToString());
+                    internalCode.Add($"SYMBOL({c})");
                     i++;
                 }
             }
 
+            // Выводим все токены и их типы в итоговом результате
             return $"Идентификаторы: {string.Join(", ", identifiers)}\n" +
                    $"Числа: {string.Join(", ", numbers)}\n" +
                    $"Ключевые слова: {string.Join(", ", keywords)}\n" +
-                   $"Символы: {string.Join(" ", symbols)}";
+                   $"Символы: {string.Join(" ", symbols)}\n\n" +
+                   "Внутренний код:\n" +
+                   string.Join("\n", internalCode); // Выводим внутренний код
         }
 
         private string ReadWhile(string code, ref int index, Func<char, bool> condition)
